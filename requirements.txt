@@ -1,0 +1,8 @@
+matplotlib==3.11.2
+networkx==3.7
+numba==0.68.0
+numpy==2.5.4
+pillow==12.3.0
+pymetis==2025.2.2
+pytest==9.1.1
+scipy==1.18.1
