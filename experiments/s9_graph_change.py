@@ -1,4 +1,4 @@
-"""Section 9: treatment that changes the graph.
+"""Section 7: treatment that changes the graph.
 
 Parts:
   edges   each treated node forms Poisson(r) new edges, to uniformly random nodes or to

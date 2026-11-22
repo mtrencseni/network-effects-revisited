@@ -1,4 +1,4 @@
-"""Section 7: near the stability limit nu rho(A) -> 1.
+"""Section 6.3: near the stability limit nu rho(A) -> 1.
 
 Parts:
   power      GATE, E[DM], the spread of DM over random assignments, and the power of a

@@ -86,8 +86,11 @@ def _directed_follow(n, m, rng):
 
 def label(spec):
     f = spec['family']
-    extra = {'ws': f"p={spec.get('p', 0.1)}", 'cm': f"γ={spec.get('gamma', 2.5)}",
-             'gam': f"cv={spec.get('cv')}", 'sbm': f"μ={spec.get('mu', 0.1)}"}.get(f, '')
+    # the default rewiring (p = 0.1) and inter-block share (mu = 0.1) are not shown: in the paper
+    # p is the treated fraction and mu a Poisson mean; non-default values are
+    extra = {'ws': f"p={spec['p']}" if spec.get('p', 0.1) != 0.1 else '',
+             'cm': f"γ={spec.get('gamma', 2.5)}", 'gam': f"cv={spec.get('cv')}",
+             'sbm': f"μ={spec['mu']}" if spec.get('mu', 0.1) != 0.1 else ''}.get(f, '')
     names = {'ws': 'Watts-Strogatz', 'er': 'Erdős-Rényi', 'ba': 'Barabási-Albert',
              'cm': 'power-law', 'gam': 'gamma configuration', 'sbm': 'SBM',
              'dws': 'directed ring', 'dba': 'directed follower'}

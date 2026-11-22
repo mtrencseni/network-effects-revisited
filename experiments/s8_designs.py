@@ -1,4 +1,4 @@
-"""Section 8: designs and estimators.
+"""Sections 6.1 and 6.2: designs and estimators.
 
 Observed outcomes are y = Poisson(W c) / W over a W-day window, with node
 heterogeneity lam_i ~ Gamma(2, 1/2) (mean 1) unless stated otherwise.

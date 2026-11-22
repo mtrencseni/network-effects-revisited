@@ -444,8 +444,8 @@ def s5():
                 ax.plot(r['same_arm'], r['ratio'], 'x' if c['design'] == 'blocks' else '+', ms=6,
                         color=FAM_COLORS['sbm'], alpha=0.9)
         if mu_rows:
-            ax.plot([], [], 'x', color=FAM_COLORS['sbm'], label='SBM, μ = 0.2 to 0.7, true blocks')
-            ax.plot([], [], '+', color=FAM_COLORS['sbm'], label='SBM, μ = 0.2 to 0.7, METIS 1,000')
+            ax.plot([], [], 'x', color=FAM_COLORS['sbm'], label='SBM, 20% to 70% between blocks, true blocks')
+            ax.plot([], [], '+', color=FAM_COLORS['sbm'], label='SBM, 20% to 70% between blocks, METIS 1,000')
         ax.set_xlabel('share of neighbors in the same arm')
         ax.set_ylabel('measured launch effect ratio,\nE[DM] / GATE')
         # the points fill the band from (0.5, 0.5) up to (1, 0.9); the lower right is empty
@@ -485,8 +485,8 @@ def s5():
         axes[1].set_xscale('log')
         axes[1].set_yscale('log')
         axes[1].set_xlabel('treated fraction (targeted)')
-        axes[1].set_ylabel('measured launch effect ratio,\nE[DM] / GATE')
-        axes[2].legend(handles=_styles(('top degree', '--', 'o'), ('top centrality', ':', 'o')),
+        axes[1].set_ylabel('measured launch effect ratio,\nDM / GATE')
+        axes[2].legend(handles=_styles(('top degree', '--', 'o'), ('top untreated production', ':', 'o')),
                        fontsize=7)
         axes[2].set_xlabel('treated share of untreated production')
         axes[2].set_ylabel('lift of the targeted group, lift / GATE')
@@ -1182,7 +1182,7 @@ def figM_1_multiplier_attenuation():
             pred = [theory.attenuation(x / st['rho'], st['rho'], st['kbar'], st['b'], st['n'],
                                        deg_hist=st['hist'], triangles_per_node=st['tri']) for x in xg]
             a1.plot(xg, pred, '--', color=FAM_COLORS[f['family']], lw=0.8)
-    a1.plot([], [], 'k--', lw=0.8, label='closed form (A.3)')
+    a1.plot([], [], 'k--', lw=0.8, label='closed form (B.3)')
     a1.set_xlabel('peer-effect strength, νρ(A)')
     a1.set_ylabel('measured launch effect ratio,\nE[DM] / GATE')
     a1.set_ylim(0, 1.02)
@@ -1283,12 +1283,12 @@ def figM_4_clusters():
             a0.plot(1 - r['cut'], r['ratio'], 'x' if c['design'] == 'blocks' else '+', ms=6,
                     color=FAM_COLORS['sbm'], alpha=0.9)
     phi = np.linspace(0, 1, 60)
-    a0.plot(phi, (1 - 0.5) / (1 - 0.5 * phi), 'k--', lw=0.8, label='mean field (A.4), (1 − νρ)/(1 − νρϕ)')
+    a0.plot(phi, (1 - 0.5) / (1 - 0.5 * phi), 'k--', lw=0.8, label='mean field (B.4), (1 − νρ)/(1 − νρϕ)')
     for d, m in marks.items():
         a0.plot([], [], m, color='gray', label=mark_name[d])
     if mu_rows:
-        a0.plot([], [], 'x', color=FAM_COLORS['sbm'], label='SBM, μ = 0.2 to 0.7, true blocks')
-        a0.plot([], [], '+', color=FAM_COLORS['sbm'], label='SBM, μ = 0.2 to 0.7, METIS 1,000')
+        a0.plot([], [], 'x', color=FAM_COLORS['sbm'], label='SBM, 20% to 70% between blocks, true blocks')
+        a0.plot([], [], '+', color=FAM_COLORS['sbm'], label='SBM, 20% to 70% between blocks, METIS 1,000')
     a0.set_xlabel('share of edges inside clusters, ϕ  (νρ = 0.5)')
     a0.set_ylabel('measured launch effect ratio,\nE[DM] / GATE')
     better(a0)
@@ -1438,7 +1438,7 @@ def figM_7_graph_change():
                 Line2D([], [], color='k', ls='-', label='cluster split'),
                 Line2D([], [], color='k', ls='', marker='o', label='new friends: friends of friends'),
                 Line2D([], [], color='k', ls='', marker='s', label='new friends: random users'),
-                Line2D([], [], color=FAM_COLORS['sbm'], label='SBM (μ=0.1)'),
+                Line2D([], [], color=FAM_COLORS['sbm'], label='SBM'),
                 Line2D([], [], color=FAM_COLORS['ba'], label='Barabási-Albert')]
     a0.set_xlabel('new friends per treated user  (νρ = 0.5 before treatment)')
     a0.set_ylabel('measured launch effect ratio,\nE[DM] / GATE')
@@ -1506,7 +1506,7 @@ def figM_8_concave():
         a1.plot(r['rhoJ'], r['small']['dm_p0.1'] / r['small']['gate'], 'o', ms=2.5, alpha=0.5,
                 color=FAM_COLORS[c['fam']['family']], mec='none')
     xg = np.linspace(0, 1, 50)
-    a1.plot(xg, 1 - xg, 'k-', lw=0.8, label='linear-model relation, 1 − νρ')
+    a1.plot(xg, 1 - xg, 'k-', lw=0.8, label='linear-model relation, 1 − ρ(J)')
     for fam in FAM_ORDER[:5]:
         a1.plot([], [], 'o', color=FAM_COLORS[fam], label=label({'family': fam}))
     a1.set_xlim(0, 1)
@@ -1580,7 +1580,7 @@ def figM_1b_attenuation():
                                        deg_hist=st['hist'], triangles_per_node=st['tri']) for x in xg]
             ax.plot(xg, pred, '--', color=FAM_COLORS[f['family']], lw=0.8)
     ax.plot([0, 1], [1, 0], color='0.6', lw=0.8, ls=':', label='1 − νρ')
-    ax.plot([], [], 'k--', lw=0.8, label='closed form (A.3)')
+    ax.plot([], [], 'k--', lw=0.8, label='closed form (B.3)')
     ax.set_xlabel('peer-effect strength, νρ(A)')
     ax.set_ylabel('measured launch effect ratio,\nE[DM] / GATE')
     better(ax)
@@ -1698,7 +1698,7 @@ def figM_9_threshold():
                     if len(below):
                         ax.axvline(pg[below[0]], color=f'C{i}', lw=0.8, ls=':', alpha=0.9)
     ax.plot([], [], 'k-', label='Erdős-Rényi')
-    ax.plot([], [], 'k--', label='Watts-Strogatz (p=0.1)')
+    ax.plot([], [], 'k--', label='Watts-Strogatz')
     ax.plot([], [], color='k', lw=0.8, ls=':', label='predicted critical fraction p*')
     ax.set_xscale('log')
     ax.set_xlabel('share of users treated, p')
@@ -1807,7 +1807,8 @@ def sM():
 
 
 if __name__ == '__main__':
-    parts = sys.argv[1:] or ['s4', 's5', 's6', 's7', 's8', 's9', 's10', 's12', 'sM', 'sA']
+    parts = sys.argv[1:] or ['thumbs', 's4', 's5', 's6', 's7', 's8', 's9', 's10', 's12', 'sM', 'sM4', 'sM58',
+                             'figM_9_threshold', 'sA']
     for p in parts:
         print(p)
         globals()[p]()

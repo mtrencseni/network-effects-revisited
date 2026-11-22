@@ -1,4 +1,4 @@
-"""Section 5: the effects across graph families and sizes.
+"""Section 4: the effects across graph families and sizes.
 
 Parts (run all, or name them on the command line):
   multiplier   social multiplier mean((I - nu A)^{-1} 1) against nu rho(A) and nu kbar

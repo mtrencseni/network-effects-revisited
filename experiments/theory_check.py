@@ -622,11 +622,12 @@ def t9():
 
 
 if __name__ == '__main__':
-    parts = sys.argv[1:] or ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9']
+    # T8 (raised peer effect) belongs to a check that is no longer in the paper
+    parts = sys.argv[1:] or ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T9']
     for p in parts:
         globals()[p.lower()]()
     out = os.path.join(ROOT, 'results', 'theory_pairs.jsonl')
-    if len(parts) == 9:
+    if not sys.argv[1:]:
         with open(out, 'w') as fh:
             for row in PAIRS:
                 fh.write(json.dumps(row) + '\n')

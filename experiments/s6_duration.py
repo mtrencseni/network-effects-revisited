@@ -1,4 +1,4 @@
-"""Section 6: experiment duration.
+"""Section 5: experiment duration.
 
 The network starts in its untreated steady state c0 = lam (I - nu A)^{-1} 1. At t = 0
 treatment starts, and c_t = lam + dlam z + nu A c_{t-1}. The measured lift DM(t) and

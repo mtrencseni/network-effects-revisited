@@ -1,4 +1,4 @@
-"""Size experiment of Section 4.4 at N = 10^8 and 10^9 with mean degree 2.
+"""Size experiment of Section 4.3 / Appendix F.4 at N = 10^4 to 10^9 with mean degree 2.
 
 The same quantities as s5_effects.size (spectral radius, multiplier, E[DM]/GATE under a Bernoulli 10%
 split at nu rho = 0.5) on Erdos-Renyi and Barabasi-Albert graphs with kbar = 2, one graph per point.
@@ -80,4 +80,4 @@ if __name__ == '__main__':
         with open(PATH, 'a') as f:
             f.write(json.dumps(dict(config=cfg, result=res)) + '\n')
     else:
-        main([int(float(x)) for x in sys.argv[1:]] or [10**8, 10**9])
+        main([int(float(x)) for x in sys.argv[1:]] or [10**k for k in range(4, 10)])

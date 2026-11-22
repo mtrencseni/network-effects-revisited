@@ -1,17 +1,17 @@
-"""Size check for Sections 6 to 9: the headline quantity of each section at N = 10^5, 10^6, 10^7.
+"""Size check (Appendix E) for Sections 5 to 8: the headline quantity of each section at N = 10^5, 10^6, 10^7.
 
 Each part calls the experiment function of its section with a reduced configuration (fewer
 assignments, one or two parameter values) and an explicit n. Results go to s11_<part>.jsonl,
 separate from the main results, so the main figures are unchanged.
 
 Parts:
-  paths      Section 6: DM(t) and GATE(t) after launch, nu rho = 0.9
-  clusters   Section 7.1: E[DM]/GATE and RMSE, Bernoulli vs METIS clusters of 1,000, nu rho = 0.6
-  power      Section 7.4: power and noise near the stability limit
-  edges      Section 8.1: new edges, user-level and cluster split
-  users      Section 8.2: new users
-  nutreat    Section 9.1: treatment that raises the peer effect
-  threshold  Section 9.2: threshold contagion
+  paths      Section 5: DM(t) and GATE(t) after launch, nu rho = 0.9
+  clusters   Section 6.1: E[DM]/GATE and RMSE, Bernoulli vs METIS clusters of 1,000, nu rho = 0.6
+  power      Section 6.3: power and noise near the stability limit
+  edges      Section 7.1: new edges, user-level and cluster split
+  users      Section 7.2: new users
+  nutreat    (earlier version) treatment that raises the peer effect
+  threshold  Section 8.1: threshold contagion
 """
 import sys
 

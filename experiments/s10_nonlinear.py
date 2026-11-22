@@ -1,4 +1,4 @@
-"""Section 10: models outside the linear one.
+"""Section 8.1 (threshold contagion) and an earlier raised-peer-effect model: models outside the linear one.
 
 Parts:
   nutreat    treatment raises a node's peer effect: nu_i = nu (1 + delta z_i), no change to
