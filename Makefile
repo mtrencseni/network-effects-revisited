@@ -6,7 +6,7 @@ BUILD := $(CURDIR)/build
 PAPER_DIR := paper
 TUTORIAL_DIR := paper/tutorial
 
-.PHONY: all test reproduce-2023 experiments figures paper tutorial clean
+.PHONY: all test reproduce-2023 experiments figures paper review pdfs tutorial clean
 
 all: test paper tutorial
 
@@ -32,6 +32,17 @@ paper:
 	cd $(PAPER_DIR) && $(LATEXMK) -pdf -interaction=nonstopmode -halt-on-error \
 		-outdir=$(BUILD)/latex paper.tex
 	cp $(BUILD)/latex/paper.pdf $(PAPER_DIR)/paper.pdf
+
+# review copy of the paper: each section on a new page, floats at section end
+review:
+	$(PYTHON) $(PAPER_DIR)/make_tex.py paper.md review.tex --review
+	mkdir -p $(BUILD)/latex
+	cd $(PAPER_DIR) && $(LATEXMK) -pdf -interaction=nonstopmode -halt-on-error \
+		-outdir=$(BUILD)/latex review.tex
+	cp $(BUILD)/latex/review.pdf $(PAPER_DIR)/review.pdf
+
+# both paper.pdf and review.pdf
+pdfs: paper review
 
 tutorial:
 	cd $(TUTORIAL_DIR) && ../../$(PYTHON) logfig.py

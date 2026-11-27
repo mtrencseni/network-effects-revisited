@@ -17,13 +17,13 @@
 \newcommand{\vc}{\boldsymbol{c}}
 \newcommand{\vz}{\boldsymbol{z}}
 \newcommand{\vb}{\boldsymbol{b}}
-\newcommand{\vu}{\boldsymbol{u}}
+\newcommand{\vv}{\boldsymbol{v}}
 \newcommand{\ve}{\boldsymbol{e}}
 \newcommand{\vmu}{\boldsymbol{\mu}}
 \newcommand{\mA}{\mathbf{A}}
 \newcommand{\mM}{\mathbf{M}}
 \newcommand{\mI}{\mathbf{I}}
-\newcommand{\mU}{\mathbf{U}}
+\newcommand{\mV}{\mathbf{V}}
 % \pg{fill1}{fill2}{fill3}{value under 1}{value under 2}{value under 3}
 \newcommand{\pgscale}{0.85}
 \newcommand{\pg}[6]{%
@@ -167,29 +167,29 @@ The eigenvalues of $\mA$ solve
 \quad\Longrightarrow\quad
 \mu \in \{-\sqrt2,\; 0,\; +\sqrt2\} .
 \]
-The spectral radius $\rho(\mA)$ is the largest absolute eigenvalue of $\mA$: $\rho(\mA) = \sqrt2 \approx 1.414$, with eigenvector $\vu = (1, \sqrt2, 1)/2$, largest at the hub.  The mean degree is $\bar k = 4/3$; $\rho$ is larger because the hub's two friends count for more than the average suggests.
+The spectral radius $\rho(\mA)$ is the largest absolute eigenvalue of $\mA$: $\rho(\mA) = \sqrt2 \approx 1.414$, with eigenvector $\vv = (1, \sqrt2, 1)/2$, largest at the hub.  The mean degree is $\bar k = 4/3$; $\rho$ is larger because the hub's two friends count for more than the average suggests.
 
-\textbf{Why the iteration converges when $\nu\rho < 1$.}  $\mA$ is symmetric, so it has real eigenvalues $\mu_i$ and orthonormal eigenvectors $\vu_i$ ($\vu_i^\top \vu_i = 1$, $\vu_i^\top \vu_j = 0$ for $i \ne j$), and it can be written as a product of three matrices: the eigenvectors as the columns of $\mU$, the eigenvalues on the diagonal, and $\mU^\top$.  For this graph:
+\textbf{Why the iteration converges when $\nu\rho < 1$.}  $\mA$ is symmetric, so it has real eigenvalues $\mu_i$ and orthonormal eigenvectors $\vv_i$ ($\vv_i^\top \vv_i = 1$, $\vv_i^\top \vv_j = 0$ for $i \ne j$), and it can be written as a product of three matrices: the eigenvectors as the columns of $\mV$, the eigenvalues on the diagonal, and $\mV^\top$.  For this graph:
 \[
-\mA = \mU \,\mathrm{diag}(\vmu)\, \mU^\top
+\mA = \mV \,\mathrm{diag}(\vmu)\, \mV^\top
 =
 \begin{pmatrix} \tfrac12 & \tfrac1{\sqrt2} & \tfrac12 \\[2pt] \tfrac{\sqrt2}{2} & 0 & -\tfrac{\sqrt2}{2} \\[2pt] \tfrac12 & -\tfrac1{\sqrt2} & \tfrac12 \end{pmatrix}
 \begin{pmatrix} \sqrt2 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & -\sqrt2 \end{pmatrix}
 \begin{pmatrix} \tfrac12 & \tfrac{\sqrt2}{2} & \tfrac12 \\[2pt] \tfrac1{\sqrt2} & 0 & -\tfrac1{\sqrt2} \\[2pt] \tfrac12 & -\tfrac{\sqrt2}{2} & \tfrac12 \end{pmatrix},
 \]
-with $\vu_1 = (1, \sqrt2, 1)/2$ for $\mu_1 = \sqrt2$, $\vu_2 = (1, 0, -1)/\sqrt2$ for $\mu_2 = 0$ and $\vu_3 = (1, -\sqrt2, 1)/2$ for $\mu_3 = -\sqrt2$.  (Check: $\mA \vu_3 = (-\sqrt2, 2, -\sqrt2)/2 = -\sqrt2\, \vu_3$.)  Multiplying out the product gives the same thing as a sum of one matrix per eigenvalue, $\mA = \sum_i \mu_i \vu_i \vu_i^\top$.
+with $\vv_1 = (1, \sqrt2, 1)/2$ for $\mu_1 = \sqrt2$, $\vv_2 = (1, 0, -1)/\sqrt2$ for $\mu_2 = 0$ and $\vv_3 = (1, -\sqrt2, 1)/2$ for $\mu_3 = -\sqrt2$.  (Check: $\mA \vv_3 = (-\sqrt2, 2, -\sqrt2)/2 = -\sqrt2\, \vv_3$.)  Multiplying out the product gives the same thing as a sum of one matrix per eigenvalue, $\mA = \sum_i \mu_i \vv_i \vv_i^\top$.
 
-Powers are easy in this form, because $\mU^\top \mU = \mI$ cancels between neighboring factors:
+Powers are easy in this form, because $\mV^\top \mV = \mI$ cancels between neighboring factors:
 \[
-\mA^k = \mU \,\mathrm{diag}(\vmu)\, \underbrace{\mU^\top \mU}_{\mI} \,\mathrm{diag}(\vmu)\, \mU^\top \cdots = \mU \,\mathrm{diag}(\mu_1^k, \mu_2^k, \mu_3^k)\, \mU^\top ,
+\mA^k = \mV \,\mathrm{diag}(\vmu)\, \underbrace{\mV^\top \mV}_{\mI} \,\mathrm{diag}(\vmu)\, \mV^\top \cdots = \mV \,\mathrm{diag}(\mu_1^k, \mu_2^k, \mu_3^k)\, \mV^\top ,
 \qquad
-(\nu \mA)^k \vb = \sum_i (\nu\mu_i)^k\, (\vu_i^\top \vb)\, \vu_i .
+(\nu \mA)^k \vb = \sum_i (\nu\mu_i)^k\, (\vv_i^\top \vb)\, \vv_i .
 \]
-So the part of $\vb$ along $\vu_i$, which is $(\vu_i^\top \vb)\, \vu_i$, is multiplied by $(\nu\mu_i)^k$ at step $k$.  The sum $\sum_k (\nu \mA)^k \vb$ converges exactly when $|\nu\mu_i| < 1$ for every $i$, that is, when $\nu\rho(\mA) < 1$, because $\rho(\mA) = \max_i |\mu_i|$ is the largest eigenvalue in absolute value.  The absolute value matters: here $\mu_3 = -\sqrt2$ is as large as $\mu_1 = \sqrt2$, and its part of $\vb$ would alternate in sign and grow if $\nu\sqrt2 \ge 1$.  Here $\nu\rho = \sqrt2/4 \approx 0.354$.
+So the part of $\vb$ along $\vv_i$, which is $(\vv_i^\top \vb)\, \vv_i$, is multiplied by $(\nu\mu_i)^k$ at step $k$.  The sum $\sum_k (\nu \mA)^k \vb$ converges exactly when $|\nu\mu_i| < 1$ for every $i$, that is, when $\nu\rho(\mA) < 1$, because $\rho(\mA) = \max_i |\mu_i|$ is the largest eigenvalue in absolute value.  The absolute value matters: here $\mu_3 = -\sqrt2$ is as large as $\mu_1 = \sqrt2$, and its part of $\vb$ would alternate in sign and grow if $\nu\sqrt2 \ge 1$.  Here $\nu\rho = \sqrt2/4 \approx 0.354$.
 
 \textbf{Why the steady state is nonnegative.}  Every term $(\nu \mA)^k \vb$ has nonnegative entries, since $\mA$, $\vb$ and $\nu$ are nonnegative; so does the sum.
 
-\textbf{Why it fails when $\nu\rho \ge 1$.}  The eigenvector $\vu$ of $\rho$ is positive (Perron-Frobenius theorem \cite[Ch.~8]{horn2013}), and $\vb = \lambda\one$ is positive, so $\vb$ has a positive part along $\vu$.  That part is multiplied by $(\nu\rho)^k \ge 1$ at every step, and the sum diverges.  With $\nu = 0.8$, $\nu\rho = 1.13$:
+\textbf{Why it fails when $\nu\rho \ge 1$.}  The eigenvector $\vv$ of $\rho$ is positive (Perron-Frobenius theorem \cite[Ch.~8]{horn2013}), and $\vb = \lambda\one$ is positive, so $\vb$ has a positive part along $\vv$.  That part is multiplied by $(\nu\rho)^k \ge 1$ at every step, and the sum diverges.  This positive eigenvector of $\rho$, with $\vv^\top \vv = 1$, is called the Perron vector.  On a graph with no eigenvalue $-\rho$, every other part is multiplied by a smaller factor than the part along $\vv$, so $(\nu \mA)^k \approx (\nu\rho)^k\, \vv\vv^\top$ for large $k$.  On this path both $\pm\sqrt2$ parts remain, because the graph is bipartite (every edge joins user 2 to an end user).  With $\nu = 0.8$, $\nu\rho = 1.13$:
 
 \begin{center}
 \begin{tabular}{rccc}
