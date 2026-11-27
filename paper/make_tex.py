@@ -236,11 +236,11 @@ def inline(t):
 
 
 def _inline(t):
-    out, parts = [], re.split(r'(`[^`]*`|\$[^$]+\$)', t)
+    out, parts = [], re.split(r'(\[[^\]]+\]\(https?://[^)\s]+\)|<https?://[^>\s]+>|`[^`]*`|\$[^$]+\$)', t)
     expanded = []
     stash = []
     for p in parts:
-        if p.startswith('`') and p.endswith('`') and len(p) > 1:
+        if (p.startswith('`') and p.endswith('`') and len(p) > 1) or p.startswith('<http') or re.fullmatch(r'\[[^\]]+\]\(https?://\S+\)', p):
             expanded.append(p)
             continue
         if p.startswith('$') and p.endswith('$') and len(p) > 2:   # explicit LaTeX math, verbatim
@@ -262,6 +262,14 @@ def _inline(t):
     for p in parts:
         if p.startswith('\x00'):
             out.append('$' + p.strip('\x00') + '$ ')
+            continue
+        m = re.fullmatch(r'\[([^\]]+)\]\((https?://\S+)\)', p)
+        if m:   # [text](https://x) -> text, linked to the URL
+            out.append('\\href{' + m.group(2) + '}{' + m.group(1).replace('_', '\\_') + '}')
+            continue
+        if p.startswith('<http') and p.endswith('>'):   # <https://x> -> link to the URL, shown as x
+            u = p[1:-1]
+            out.append('\\href{' + u + '}{\\nolinkurl{' + re.sub(r'^https?://', '', u) + '}}')
             continue
         if p.startswith('`') and p.endswith('`') and len(p) > 1:
             q = p[1:-1]

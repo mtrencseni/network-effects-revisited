@@ -6,7 +6,7 @@ BUILD := $(CURDIR)/build
 PAPER_DIR := paper
 TUTORIAL_DIR := paper/tutorial
 
-.PHONY: all test reproduce-2023 experiments figures paper review pdfs tutorial clean
+.PHONY: all test reproduce-2023 experiments figures paper review pdfs submission tutorial clean
 
 all: test paper tutorial
 
@@ -43,6 +43,10 @@ review:
 
 # both paper.pdf and review.pdf
 pdfs: paper review
+
+# arXiv upload: submission/network-effects-revisited-arxiv.zip (paper.tex + figures)
+submission: paper
+	$(PYTHON) scripts/make_submission.py
 
 tutorial:
 	cd $(TUTORIAL_DIR) && ../../$(PYTHON) logfig.py

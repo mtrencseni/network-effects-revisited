@@ -60,7 +60,7 @@ whatever the treated fraction. For large $N$ this is the ADE (Eckles, Karrer and
 
 Every simulation runs on the five graph families of Table [families]. Unless stated otherwise, graphs have $N = 10^5$ nodes and mean degree $\bar k = 20$, the baseline production is $\lambda = 1$ and the treatment adds $\Delta\lambda = 0.05$, so the direct effect is 5% of baseline production (Appendix C and Table [setup]). The power-law configuration model has degree exponent $\gamma = 2.5$ and maximum degree $\sqrt N$. The peer effect is set by its distance from the stability limit, $\nu\rho$ from 0.1 to 0.999, except where a fixed $\nu\bar k$ is stated.
 
-The ground truth comes from solving $(I - \nu A)c = b$ with a sparse solver to a relative tolerance of $10^{-10}$, for many assignments at once; "exact" below means this, as opposed to a closed-form approximation. Each point averages several graphs and treatment assignments (Table [setup]), and error bars are standard errors over graphs. The simulator is the project's `netfx` package (Appendix C) and is released with the paper.
+The ground truth comes from solving $(I - \nu A)c = b$ with a sparse solver to a relative tolerance of $10^{-10}$, for many assignments at once; "exact" below means this, as opposed to a closed-form approximation. Each point averages several graphs and treatment assignments (Table [setup]), and error bars are standard errors over graphs. The simulator (the `netfx` package, Appendix C), the raw results and the scripts that reproduce every figure are at the GitHub repo [mtrencseni/network-effects-revisited](https://github.com/mtrencseni/network-effects-revisited).
 
 ## 4. Bias across graphs and sizes
 
